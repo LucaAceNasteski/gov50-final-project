@@ -19,11 +19,15 @@ I am interested in exploring data related to basketball, salaries, rankings and 
 4. The outcome variable is how many minutes the NBA player plays as a result and how many wins their team gets during the season. It will be measured by minutes played, plus-minus effect on the game and team win share.
 5. That defense is the fundamental of the game and in the data set greater defensive statistics already mean you are playing and making a great impact. I would like to see though the players that do not play as much yet still have great defensive statistics and see how much they actually impact the game. This may be disproved in the statistics because little playing time often correlates to lower percentages and opportunity for defensive statistics.
 
+## Loading in... 
+
 ```{r}
 library(ggplot2)
 nba <- nba_data_historical
 nba
 ```
+
+## Visualisation of data
 
 ```{r}
 nba <-
