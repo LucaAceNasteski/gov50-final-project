@@ -22,7 +22,9 @@ I am interested in exploring data related to basketball, salaries, rankings and 
 ## Loading in... 
 
 ```{r}
+library(tidyverse)
 library(ggplot2)
+nba <- read_csv("nba-data-historical.csv")
 nba <- nba_data_historical
 nba
 ```
