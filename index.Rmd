@@ -24,7 +24,7 @@ I am interested in exploring data related to basketball, salaries, rankings and 
 ```{r}
 library(tidyverse)
 library(ggplot2)
-nba <- read_csv("nba-data-historical.csv")
+read_csv("nba-data-historical.csv")
 nba <- nba_data_historical
 nba
 ```
@@ -40,7 +40,7 @@ nba |>
 
 nba |>
   ggplot(mapping = aes(x = team_id, y = proportion, fill = age)) + 
-  geom_col(position = "dodge")
+  geom_col(position = "dodge") 
 
 ```
 
