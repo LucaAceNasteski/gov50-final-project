@@ -24,16 +24,13 @@ I am interested in exploring data related to basketball, salaries, rankings and 
 ```{r}
 library(tidyverse)
 library(ggplot2)
-read_csv("nba-data-historical.csv")
-nba <- nba_data_historical
-nba
+nba <- read_csv("nba-data-historical.csv")
 ```
 
-## Visualisation of data
+# Visualisation of data
 
 ```{r}
-nba <-
-nba |>
+nba <- nba |>
   group_by(team_id, age) |>
   summarize(count = n()) |>
   mutate(proportion = count/sum(count))
