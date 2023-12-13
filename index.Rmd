@@ -49,7 +49,8 @@ wave28 <- wave28 |>
     THERMO_THERMBA_W28 > 25 & THERMO_THERMBA_W28 < 50 ~ "Somewhat Cold and Negative",
     THERMO_THERMBA_W28 == 50 ~ "Neither Positive or Negative", 
     THERMO_THERMBA_W28 > 50 & THERMO_THERMBA_W28 < 75 ~ "Somewhat Warm and Positive",
-    THERMO_THERMBA_W28 >= 75 & THERMO_THERMBA_W28 <= 100  ~ "Very Warm and Positive"
+    THERMO_THERMBA_W28 >= 75 & THERMO_THERMBA_W28 <= 100  ~ "Very Warm and Positive",
+    THERMO_THERMBA_W28 == 999 ~ "No Response"
   ))
 
 wave28 <- wave28 |>
@@ -59,7 +60,8 @@ wave28 <- wave28 |>
     THERMO_THERMBB_W28 > 25 & THERMO_THERMBB_W28 < 50 ~ "Somewhat Cold and Negative",
     THERMO_THERMBB_W28 == 50 ~ "Neither Positive or Negative", 
     THERMO_THERMBB_W28 > 50 & THERMO_THERMBB_W28 < 75 ~ "Somewhat Warm and Positive",
-    THERMO_THERMBB_W28 >= 75 & THERMO_THERMBB_W28 <= 100 ~ "Very Warm and Positive"
+    THERMO_THERMBB_W28 >= 75 & THERMO_THERMBB_W28 <= 100 ~ "Very Warm and Positive",
+    THERMO_THERMBB_W28 == 999 ~ "No Response"
   ))
 
 wave28 <- wave28 |>
@@ -67,6 +69,18 @@ wave28 <- wave28 |>
 
 wave28
 ```
+
+```{r}
+
+perc_gender <- wave28 |>
+  group_by(gender) |>
+  summarize(count = n()) |>
+  mutate(perc_gender = count / sum(count))
+
+perc_gender
+
+```
+
 
 ```{r}
 
@@ -93,7 +107,19 @@ perc_thermo_democrats <- wave28 |>
   mutate(perc_thermo_democrats = count / sum(count))
 
 perc_thermo_democrats
+
 ```
+
+```{r}
+
+wave28 |>
+  filter(parent_marital_status != "No Response") |>
+  group_by(parent_marital_status, gender) |>
+  summarize(count = n()) |>
+  mutate(perc_parent_marital_status = count / sum(count))
+
+```
+
 
 ```{r}
 
@@ -180,6 +206,17 @@ ggplot(democrats, aes(x = parent_marital_status, y = mean_thermo_democrats, fill
 
 ```
 
+```{r}
+
+ggplot(republicans, aes(x = parent_marital_status, y = mean_thermo_republicans, fill = parent_marital_status)) +
+  geom_col(stat = "identity", position = "dodge", alpha = 0.8) +
+  labs(x = "Parent Marital Status", y = "Mean Thermo Republicans", title = "Comparison of Mean Thermo towards Republicans by Marital Status")
+
+ggplot(democrats, aes(x = parent_marital_status, y = mean_thermo_democrats, fill = parent_marital_status)) +
+  geom_col(stat = "identity", position = "dodge", alpha = 0.8) + 
+  labs(x = "Parent Marital Status", y = "Mean Thermo Republicans", title = "Comparison of Mean Thermo towards Democrats by Marital Status")
+
+```
 
 
 
@@ -196,5 +233,12 @@ ggplot(republicans1, aes(x = living_type, y = mean_thermo_republicans, fill = li
 
 ```
 
+## Introduction
+
+## Data Section
+
+## Results Section
+
+## Conclusion Section 
 
 
